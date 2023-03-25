@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model vendas {
+  idVen             String   @id @default(cuid())
+  dataVen           DateTime @default(now())
+  codVen            Int      @unique
+  valorVendaLiquido Float
+  valorVendaBruto   Float
+  valorDesconto     Float
+  valorAcrescimo    Float
+  qtdeTotalUnitaria Int
+  qtdeTotalCaixa    Int
+  percDescVenda     Float
+  percAcrescVenda   Float
+}
+
+model itensVenda {
+  codVen                Int      @id @unique
+  codigoItem            String
+  descricaoItem         String
+  dataVen               DateTime @default(now())
+  valorItem             Float
+  DescontoItem          Float
+  AcrescimoItem         Float
+  qtdeUnitariaItem      Int
+  qtdeCaixaItem         Int
+  precoUnitarioItem     Float
+  precoCaixaItem        Float
+  barraUnitariaItem     String
+  barraCaixaItem        String
+  valorItemComDescVenda Float
+  percDescItem          Float
+  percAcrescItem        Float
+}
+
+model usuarios {
+  idUsuario String @id @unique @default(cuid())
+  login     String @unique
+  senha     String
+}
+
+model produtos {
+  codigoProduto        String  @id @unique
+  descricaoProduto     String
+  precoUnitProduto     Float
+  precoCaixaProduto    Float
+  custoUnitProduto     Float
+  custoCaixaProduto    Float
+  qtdeUnitaria         Int
+  qtdeCaixa            Int
+  barraUnitariaProduto String  @unique
+  barraCaixaProduto    String  @unique
+  usaQtdeCaixa         Boolean
+}
+
+model estoqueprodutos {
+  codigoProduto       String @id @unique
+  descricaoProduto    String
+  qtdeEstoqueUnitaria Int
+  qtdeEstoqueCaixa    Int
+  barraUnitaria       String @unique
+  barraCaixa          String @unique
+}
+
+model movimentacaoprodutos {
+  idMov                   String   @id @unique @default(cuid())
+  codigoProduto           String
+  descricaoProduto        String
+  tipoMov                 String
+  precoUnitarioItem       Float
+  precoCaixaItem          Float
+  barraUnitariaProd       String
+  barraCaixaProd          String
+  qtdeUnitariaItem        Int
+  qtdeCaixaItem           Int
+  dataMov                 DateTime @default(now())
+  valorTotItem            Float
+  descontoPercUnitItem    Float
+  descontoValorUnitItem   Float
+  acrescimoPercUnitItem   Float
+  acrescimoValorUnitItem  Float
+  descontoPercCaixaItem   Float
+  descontoValorCaixaItem  Float
+  acrescimoPercCaixaItem  Float
+  acrescimoValorCaixaItem Float
+  valorComDescDaVenda     Float
+}
