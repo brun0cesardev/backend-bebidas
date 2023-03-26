@@ -60,9 +60,7 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
         const consultaProdutoBarra = z.object({
             barraConsultada: z.string()
          })
-
         const { barraConsultada } = consultaProdutoBarra.parse(request.body);
-
         try {
            const produtoEncontrado = await prisma.produtos.findMany({
                 where: {
@@ -76,7 +74,6 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                     ]
                 }
             })
-
             return produtoEncontrado;
         } catch(error: any) {
             console.error(error.message)
