@@ -15,7 +15,7 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
             custoCaixaItem: z.number(),
             barraUnitariaItem: z.string(),
             barraCaixaItem: z.string(),
-            usaQtdeEmCaixa: z.boolean()
+            usaQtdeEmCaixa: z.boolean(),
         });
 
         const generateCodigoProduto = new ShortUniqueId({ length: 8 });
@@ -53,6 +53,59 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
         } catch (error: any) {
             console.error(error.message);
             return reply.status(400).send({message: 'Erro ao criar o produto. Erro: '+ error.message});
+        }
+    });
+
+    fastify.put('/cadastroproduto/alteraproduto', async (request, reply) => {
+        const createProduto = z.object({
+            codigoDoProduto: z.string(),
+            descricaoProd: z.string(),
+            qtdeUnitariaItem: z.number(),
+            qtdeCaixaItem: z.number(),
+            precoUnitarioItem: z.number(),
+            precoCaixaItem: z.number(),
+            custoUnitarioItem: z.number(),
+            custoCaixaItem: z.number(),
+            barraUnitariaItem: z.string(),
+            barraCaixaItem: z.string(),
+            usaQtdeEmCaixa: z.boolean(),
+        });
+
+        const { codigoDoProduto,
+            descricaoProd,
+            qtdeUnitariaItem,
+            qtdeCaixaItem,
+            precoUnitarioItem,
+            precoCaixaItem,
+            custoUnitarioItem,
+            custoCaixaItem,
+            barraUnitariaItem,
+            barraCaixaItem,
+            usaQtdeEmCaixa } = createProduto.parse(request.body);
+
+        try {
+            await prisma.produtos.update({
+                data: {
+                    descricaoProduto: descricaoProd,
+                    qtdeUnitaria: qtdeUnitariaItem,
+                    qtdeCaixa: qtdeCaixaItem,
+                    precoUnitProduto: precoUnitarioItem,
+                    precoCaixaProduto: precoCaixaItem,
+                    custoUnitProduto: custoUnitarioItem,
+                    custoCaixaProduto: custoCaixaItem,
+                    barraUnitariaProduto: barraUnitariaItem,
+                    barraCaixaProduto: barraCaixaItem,
+                    usaQtdeCaixa: usaQtdeEmCaixa,
+                },
+                where: {
+                    codigoProduto: codigoDoProduto,
+                }
+            })
+    
+            return reply.status(200).send({message: 'Produto alterado com sucesso.', codigoDoProduto});
+        } catch (error: any) {
+            console.error(error.message);
+            return reply.status(400).send({message: 'Erro ao alterar o produto. Erro: '+ error.message});
         }
     });
 

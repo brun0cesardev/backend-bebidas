@@ -62,8 +62,8 @@ model produtos {
   custoCaixaProduto    Float
   qtdeUnitaria         Int
   qtdeCaixa            Int
-  barraUnitariaProduto String  @unique
-  barraCaixaProduto    String  @unique
+  barraUnitariaProduto String
+  barraCaixaProduto    String
   usaQtdeCaixa         Boolean
 }
 
