@@ -9,7 +9,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "http://localhost:3333/$1"
+        "dest": "https://server-bebidas.vercel.app/$1"
       }
     ]
   }

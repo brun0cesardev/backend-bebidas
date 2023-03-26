@@ -13,12 +13,12 @@ async function bootstrap() {
         origin: true,
     })
 
-    const port = process.env.PORT || 3333;
+    const port = Number(process.env.PORT || '3333');
 
     await fastify.register(cadastroProdutoRoutes)
     await fastify.register(authRoutes)
 
-    await fastify.listen({ port: 3333 })
+    await fastify.listen({ port: port })
 }
 
 bootstrap()
