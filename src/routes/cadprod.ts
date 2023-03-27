@@ -20,6 +20,7 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
 
         const generateCodigoProduto = new ShortUniqueId({ length: 8 });
         const codigoProdCreated = String(generateCodigoProduto()).toUpperCase();
+        let produtoAEncontrar;
 
         const { descricaoProd,
             qtdeUnitariaItem,
@@ -32,32 +33,50 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
             barraCaixaItem,
             usaQtdeEmCaixa } = createProduto.parse(request.body);
 
-        try {
-            await prisma.produtos.create({
-                data: {
-                    codigoProduto: codigoProdCreated,
-                    descricaoProduto: descricaoProd,
-                    qtdeUnitaria: qtdeUnitariaItem,
-                    qtdeCaixa: qtdeCaixaItem,
-                    precoUnitProduto: precoUnitarioItem,
-                    precoCaixaProduto: precoCaixaItem,
-                    custoUnitProduto: custoUnitarioItem,
-                    custoCaixaProduto: custoCaixaItem,
-                    barraUnitariaProduto: barraUnitariaItem,
-                    barraCaixaProduto: barraCaixaItem,
-                    usaQtdeCaixa: usaQtdeEmCaixa,
+            produtoAEncontrar = await prisma.produtos.findMany({
+                where: {
+                    OR: [
+                        {
+                            barraCaixaProduto: barraCaixaItem
+                        },
+                        {
+                            barraUnitariaProduto: barraUnitariaItem
+                        }
+                    ]
                 }
-            })
+            });
     
-            return reply.status(200).send({message: 'Produto criado com sucesso.', codigoProdCreated});
-        } catch (error: any) {
-            console.error(error.message);
-            return reply.status(400).send({message: 'Erro ao criar o produto. Erro: '+ error.message});
-        }
+        if (produtoAEncontrar.length <= 0) {
+            try {
+                await prisma.produtos.create({
+                    data: {
+                        codigoProduto: codigoProdCreated,
+                        descricaoProduto: descricaoProd,
+                        qtdeUnitaria: qtdeUnitariaItem,
+                        qtdeCaixa: qtdeCaixaItem,
+                        precoUnitProduto: precoUnitarioItem,
+                        precoCaixaProduto: precoCaixaItem,
+                        custoUnitProduto: custoUnitarioItem,
+                        custoCaixaProduto: custoCaixaItem,
+                        barraUnitariaProduto: barraUnitariaItem,
+                        barraCaixaProduto: barraCaixaItem,
+                        usaQtdeCaixa: usaQtdeEmCaixa,
+                    }
+                })
+
+                return reply.status(200).send({ message: 'Produto criado com sucesso.', codigoProdCreated });
+            } catch (error: any) {
+                console.error(error.message);
+                return reply.status(400).send({ message: 'Erro ao criar o produto. Erro: ' + error.message });
+            }
+        } else {
+            const msgErro = `Código de barras já existente no produto: ${produtoAEncontrar[0].descricaoProduto}! Produto não criado.`
+            return reply.status(401).send({ message: msgErro })
+        }  
     });
 
-    fastify.put('/cadastroproduto/alteraproduto', async (request, reply) => {
-        const createProduto = z.object({
+    fastify.post('/cadastroproduto/alteraproduto', async (request, reply) => {
+        const alteraProduto = z.object({
             codigoDoProduto: z.string(),
             descricaoProd: z.string(),
             qtdeUnitariaItem: z.number(),
@@ -81,7 +100,7 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
             custoCaixaItem,
             barraUnitariaItem,
             barraCaixaItem,
-            usaQtdeEmCaixa } = createProduto.parse(request.body);
+            usaQtdeEmCaixa } = alteraProduto.parse(request.body);
 
         try {
             await prisma.produtos.update({
@@ -101,21 +120,21 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                     codigoProduto: codigoDoProduto,
                 }
             })
-    
-            return reply.status(200).send({message: 'Produto alterado com sucesso.', codigoDoProduto});
+
+            return reply.status(200).send({ message: 'Produto alterado com sucesso.', codigoDoProduto });
         } catch (error: any) {
             console.error(error.message);
-            return reply.status(400).send({message: 'Erro ao alterar o produto. Erro: '+ error.message});
+            return reply.status(400).send({ message: 'Erro ao alterar o produto. Erro: ' + error.message });
         }
     });
 
     fastify.post('/cadastroproduto/consultaproduto', async function (request, reply) {
         const consultaProdutoBarra = z.object({
             barraConsultada: z.string()
-         })
+        })
         const { barraConsultada } = consultaProdutoBarra.parse(request.body);
         try {
-           const produtoEncontrado = await prisma.produtos.findMany({
+            const produtoEncontrado = await prisma.produtos.findMany({
                 where: {
                     OR: [
                         {
@@ -128,7 +147,7 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                 }
             })
             return produtoEncontrado;
-        } catch(error: any) {
+        } catch (error: any) {
             console.error(error.message)
         }
     });
