@@ -13,7 +13,7 @@ export async function authRoutes(fastify: FastifyInstance) {
 
         let podeLogar;
 
-        if (login.toUpperCase() == 'GUILHERME' && password == '123456') {
+        if (login.toUpperCase() == 'GUILHERME' && password == 'admin') {
             podeLogar =  true
         } else {
             podeLogar = false

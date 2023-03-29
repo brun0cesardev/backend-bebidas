@@ -37,12 +37,18 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                 where: {
                     OR: [
                         {
-                            barraCaixaProduto: barraCaixaItem
+                            barraCaixaProduto: barraCaixaItem != '0' ? barraCaixaItem : undefined,
                         },
                         {
-                            barraUnitariaProduto: barraUnitariaItem
+                            barraUnitariaProduto: barraUnitariaItem != '0' ? barraUnitariaItem : undefined,
+                        },
+                        {
+                            barraCaixaProduto: barraUnitariaItem != '0' ? barraUnitariaItem : undefined,
+                        },
+                        {
+                            barraUnitariaProduto: barraCaixaItem != '0' ? barraCaixaItem : undefined,
                         }
-                    ]
+                    ],
                 }
             });
     
@@ -147,6 +153,23 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                 }
             })
             return produtoEncontrado;
+        } catch (error: any) {
+            console.error(error.message)
+        }
+    });
+
+    fastify.post('/cadastroproduto/excluirproduto', async function (request, reply) {
+        const consultaProdutoBarra = z.object({
+            codigoProd: z.string()
+        })
+        const { codigoProd } = consultaProdutoBarra.parse(request.body);
+        try {
+            await prisma.produtos.delete({
+                where: {
+                    codigoProduto: codigoProd,
+                }
+            })
+            return reply.status(200).send('Ok!');
         } catch (error: any) {
             console.error(error.message)
         }
