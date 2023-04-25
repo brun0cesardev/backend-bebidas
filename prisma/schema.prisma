@@ -72,8 +72,8 @@ model estoqueprodutos {
   descricaoProduto    String
   qtdeEstoqueUnitaria Int
   qtdeEstoqueCaixa    Int
-  barraUnitaria       String @unique
-  barraCaixa          String @unique
+  barraUnitaria       String
+  barraCaixa          String
 }
 
 model movimentacaoprodutos {
