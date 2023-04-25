@@ -3,6 +3,7 @@ import cors from '@fastify/cors'
 import { cadastroProdutoRoutes } from './routes/cadprod'
 import { authRoutes } from './routes/auth'
 import { entradaEstoqueRoutes } from './routes/movestoque';
+import { saidaEstoqueRoutes } from './routes/movestoque';
 
 
 async function bootstrap() {
@@ -17,6 +18,7 @@ async function bootstrap() {
     await fastify.register(cadastroProdutoRoutes);
     await fastify.register(authRoutes);
     await fastify.register(entradaEstoqueRoutes);
+    await fastify.register(saidaEstoqueRoutes);
 
     await fastify.listen({ port: 3333 });
 }

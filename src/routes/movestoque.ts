@@ -133,3 +133,130 @@ export async function entradaEstoqueRoutes(fastify: FastifyInstance) {
         }
     });
 };
+
+export async function saidaEstoqueRoutes(fastify: FastifyInstance) {
+    fastify.post('/saidaestoque/consultaprodutosaida', async function (request) {
+        const saidaEstoqueBody = z.object({
+            codigoBarras: z.string()
+        });
+
+        const { codigoBarras } = saidaEstoqueBody.parse(request.body);
+
+        try {
+            const produtoSaida = await prisma.produtos.findMany({
+                where: {
+                    OR: [
+                        {
+                            barraCaixaProduto: codigoBarras
+                        },
+                        {
+                            barraUnitariaProduto: codigoBarras
+                        }
+                    ]
+                }
+            });
+            return produtoSaida;
+        } catch (error: any) {
+            console.error(error.message);
+        }
+    });
+
+    fastify.post('/saidaestoque/novasaida', async function (request, reply) {
+        try {
+            const novaSaidaEstoqueBody = z.array(z.object({
+                codigoProdutoEntrada: z.string(),
+                descricaoProdutoEntrada: z.string(),
+                barraCodigoEntrada: z.string(),
+                qtdeUnitariaEntrada: z.number(),
+                qtdeCaixaEntrada: z.number(),
+            }));
+
+            const saidaEstoqueArray = novaSaidaEstoqueBody.parse(request.body);
+
+            const saidaEstoqueItemPorItem = await Promise.all(
+                saidaEstoqueArray.map(async (saida) => {
+                    const produtoDaSaida = await prisma.produtos.findFirst({
+                        where: {
+                            OR: [
+                                {
+                                    barraCaixaProduto: saida.barraCodigoEntrada,
+                                },
+                                {
+                                    barraUnitariaProduto: saida.barraCodigoEntrada
+                                }
+                            ]
+                        }
+                    });
+
+                    await prisma.movimentacaoprodutos.create({
+                        data: {
+                            codigoProduto: saida.codigoProdutoEntrada,
+                            descricaoProduto: saida.descricaoProdutoEntrada,
+                            tipoMov: 'SAIDA DE ESTOQUE',
+                            precoUnitarioItem: produtoDaSaida?.precoUnitProduto == null ? 0 : produtoDaSaida?.precoUnitProduto,
+                            precoCaixaItem: produtoDaSaida?.precoCaixaProduto == null ? 0 : produtoDaSaida?.precoCaixaProduto,
+                            barraCaixaProd: produtoDaSaida?.barraCaixaProduto == null ? '000000' : produtoDaSaida?.barraCaixaProduto,
+                            barraUnitariaProd: produtoDaSaida?.barraUnitariaProduto == null ? '000000' : produtoDaSaida?.barraUnitariaProduto,
+                            qtdeUnitariaItem: saida.qtdeUnitariaEntrada,
+                            qtdeCaixaItem: saida.qtdeCaixaEntrada,
+                            valorTotItem: 0,
+                            descontoPercUnitItem: 0,
+                            descontoValorUnitItem: 0,
+                            descontoPercCaixaItem: 0,
+                            descontoValorCaixaItem: 0,
+                            acrescimoPercUnitItem: 0,
+                            acrescimoPercCaixaItem: 0,
+                            acrescimoValorUnitItem: 0,
+                            acrescimoValorCaixaItem: 0,
+                            valorComDescDaVenda: 0
+                        }
+                    });
+
+                    const existeEstoque = await prisma.estoqueprodutos.findFirst({
+                        where: {
+                            OR: [
+                                {
+                                    barraCaixa: saida.barraCodigoEntrada,
+                                },
+                                {
+                                    barraUnitaria: saida.barraCodigoEntrada
+                                }
+                            ]
+                        }
+                    });
+
+                    if (existeEstoque == null) {
+                        await prisma.estoqueprodutos.create({
+                            data: {
+                                codigoProduto: saida.codigoProdutoEntrada,
+                                descricaoProduto: saida.descricaoProdutoEntrada,
+                                qtdeEstoqueUnitaria: saida.qtdeUnitariaEntrada,
+                                qtdeEstoqueCaixa: saida.qtdeCaixaEntrada,
+                                barraCaixa: produtoDaSaida?.barraCaixaProduto == null ? '999999' : produtoDaSaida?.barraCaixaProduto,
+                                barraUnitaria: produtoDaSaida?.barraUnitariaProduto == null ? '999999' : produtoDaSaida?.barraUnitariaProduto,
+                            }
+                        });
+                    } else {
+                        const qtdeUnitariaSaidaProd = (existeEstoque.qtdeEstoqueUnitaria - saida.qtdeUnitariaEntrada) < 0 ? 0 : (existeEstoque.qtdeEstoqueUnitaria - saida.qtdeUnitariaEntrada);
+                        const qtdeCaixaSaidaProd = (existeEstoque.qtdeEstoqueCaixa - saida.qtdeCaixaEntrada) < 0 ? 0 : (existeEstoque.qtdeEstoqueCaixa - saida.qtdeCaixaEntrada);
+                        await prisma.estoqueprodutos.update({
+                            data: {
+                                qtdeEstoqueUnitaria: qtdeUnitariaSaidaProd,
+                                qtdeEstoqueCaixa: qtdeCaixaSaidaProd,
+                                barraCaixa: produtoDaSaida?.barraCaixaProduto == null ? '999999' : produtoDaSaida?.barraCaixaProduto,
+                                barraUnitaria: produtoDaSaida?.barraUnitariaProduto == null ? '999999' : produtoDaSaida?.barraUnitariaProduto,
+                            },
+                            where: {
+                                codigoProduto: saida.codigoProdutoEntrada,
+                            }
+                        });
+                    };
+                })
+            );
+            return reply.status(200).send({ message: 'Saída feita com sucesso!' });
+        } catch (error: any) {
+            console.error(error.message);
+            return reply.status(400).send({ message: 'Erro ao dar saída. Erro: ' + error.message });
+        }
+    });
+};
