@@ -1,6 +1,5 @@
 import { prisma } from "../lib/prisma";
 import { z } from 'zod';
-import ShortUniqueId from 'short-unique-id'
 import { FastifyInstance } from "fastify";
 
 export async function entradaEstoqueRoutes(fastify: FastifyInstance) {
