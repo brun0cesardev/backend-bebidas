@@ -64,8 +64,8 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                         precoCaixaProduto: precoCaixaItem,
                         custoUnitProduto: custoUnitarioItem,
                         custoCaixaProduto: custoCaixaItem,
-                        barraUnitariaProduto: barraUnitariaItem,
-                        barraCaixaProduto: barraCaixaItem,
+                        barraUnitariaProduto: barraUnitariaItem == '' ? '0' : barraUnitariaItem,
+                        barraCaixaProduto: barraCaixaItem == '' ? '0' : barraCaixaItem,
                         usaQtdeCaixa: usaQtdeEmCaixa,
                     }
                 })
@@ -118,8 +118,8 @@ export async function cadastroProdutoRoutes(fastify: FastifyInstance) {
                     precoCaixaProduto: precoCaixaItem,
                     custoUnitProduto: custoUnitarioItem,
                     custoCaixaProduto: custoCaixaItem,
-                    barraUnitariaProduto: barraUnitariaItem,
-                    barraCaixaProduto: barraCaixaItem,
+                    barraUnitariaProduto: barraUnitariaItem == '' ? '0' : barraUnitariaItem,
+                    barraCaixaProduto: barraCaixaItem == '' ? '0' : barraCaixaItem,
                     usaQtdeCaixa: usaQtdeEmCaixa,
                 },
                 where: {
