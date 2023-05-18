@@ -16,7 +16,7 @@ datasource db {
 
 model vendas {
   idVen             String   @id @default(cuid())
-  dataVen           DateTime @default(now())
+  dataVen           String
   codVen            Int      @unique
   valorVendaLiquido Float
   valorVendaBruto   Float
@@ -32,7 +32,7 @@ model itensVenda {
   codVen                Int      @id @unique
   codigoItem            String
   descricaoItem         String
-  dataVen               DateTime @default(now())
+  dataVen               String
   valorItem             Float
   DescontoItem          Float
   AcrescimoItem         Float
@@ -87,7 +87,7 @@ model movimentacaoprodutos {
   barraCaixaProd          String
   qtdeUnitariaItem        Int
   qtdeCaixaItem           Int
-  dataMov                 DateTime @default(now())
+  dataMov                 String
   valorTotItem            Float
   descontoPercUnitItem    Float
   descontoValorUnitItem   Float
