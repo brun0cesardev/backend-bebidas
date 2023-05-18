@@ -78,7 +78,7 @@ export async function entradaEstoqueRoutes(fastify: FastifyInstance) {
                             acrescimoPercCaixaItem: 0,
                             acrescimoValorUnitItem: 0,
                             acrescimoValorCaixaItem: 0,
-                            valorComDescDaVenda: 0
+                            valorComDescDaVenda: 0,
                         }
                     });
 
