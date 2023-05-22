@@ -44,8 +44,10 @@ export async function desperdicioProdutoRoutes(fastify: FastifyInstance) {
 
         try {
             const dataHoje = new Date();
-            const diaHoje = String(dataHoje.getDate());
-            const mesHoje = String(dataHoje.getMonth());
+            const diaComZero = String(dataHoje.getDate()) == '1' || String(dataHoje.getDate()) == '2' || String(dataHoje.getDate()) == '3' || String(dataHoje.getDate()) == '4' || String(dataHoje.getDate()) == '5' || String(dataHoje.getDate()) == '6' || String(dataHoje.getDate()) == '7' || String(dataHoje.getDate()) == '8' || String(dataHoje.getDate()) == '9' ?  ('0' + String(dataHoje.getDate())) : String(dataHoje.getDate());
+            const diaHoje = diaComZero;
+            const mesComZero = String(dataHoje.getMonth()) == '1' || String(dataHoje.getMonth()) == '2' || String(dataHoje.getMonth()) == '3' || String(dataHoje.getMonth()) == '4' || String(dataHoje.getMonth()) == '5' || String(dataHoje.getMonth()) == '6' || String(dataHoje.getMonth()) == '7' || String(dataHoje.getMonth()) == '8' || String(dataHoje.getMonth()) == '9' ? ('0' + String(dataHoje.getMonth())) : String(dataHoje.getMonth()); 
+            const mesHoje = mesComZero;
             const anoHoje = String(dataHoje.getFullYear());
     
             await Promise.all(
