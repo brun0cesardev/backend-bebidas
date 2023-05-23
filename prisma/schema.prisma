@@ -15,9 +15,9 @@ datasource db {
 }
 
 model vendas {
-  idVen             String   @id @default(cuid())
+  idVen             String @id @default(cuid())
   dataVen           String
-  codVen            Int      @unique
+  codVen            Int    @unique
   valorVendaLiquido Float
   valorVendaBruto   Float
   valorDesconto     Float
@@ -29,7 +29,8 @@ model vendas {
 }
 
 model itensVenda {
-  codVen                Int      @id @unique
+  idMovVen              String @id @default(cuid())
+  codVen                Int
   codigoItem            String
   descricaoItem         String
   dataVen               String
@@ -77,7 +78,7 @@ model estoqueprodutos {
 }
 
 model movimentacaoprodutos {
-  idMov                   String   @id @unique @default(cuid())
+  idMov                   String @id @unique @default(cuid())
   codigoProduto           String
   descricaoProduto        String
   tipoMov                 String
