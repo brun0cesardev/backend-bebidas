@@ -129,7 +129,6 @@ export async function vendaRoutes(fastify: FastifyInstance) {
                         valorItemComDescVenda:0,
                         percDescItem: itemVenda.percDescItem,
                         percAcrescItem: itemVenda.percAcrescItem,
-                        
                     }
                 });
 
