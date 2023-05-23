@@ -191,7 +191,7 @@ export async function vendaRoutes(fastify: FastifyInstance) {
 
             }));
 
-            return reply.status(200).send({ message: 'Venda efetuada com sucesso! Nr: ' + String (vendaArrayBody.codVen) });
+            return reply.status(200).send({ message: 'Venda efetuada com sucesso! Nr: ' + String(vendaArrayBody.codVen) });
         } catch (error: any) {
             console.error(error.message);
             return reply.status(400).send({ message: 'Erro ao efetuar a venda. Erro: ' + error.message });
