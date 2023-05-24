@@ -7,6 +7,7 @@ import { saidaEstoqueRoutes } from './routes/movestoque';
 import { vendaRoutes } from './routes/venda';
 import { desperdicioProdutoRoutes } from './routes/desperdicio';
 import { dashboardRoutes } from './routes/dashboard';
+import { relvendaRoutes } from './routes/relvenda';
 
 
 async function bootstrap() {
@@ -25,6 +26,7 @@ async function bootstrap() {
     await fastify.register(vendaRoutes);
     await fastify.register(desperdicioProdutoRoutes);
     await fastify.register(dashboardRoutes);
+    await fastify.register(relvendaRoutes);
 
     await fastify.listen({ port: 3333 });
 }

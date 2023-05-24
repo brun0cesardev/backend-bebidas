@@ -15,6 +15,8 @@ export async function authRoutes(fastify: FastifyInstance) {
 
         if (login.toUpperCase() == 'GUILHERME' && password == 'admin') {
             podeLogar =  true
+        } else if (login.toUpperCase() == 'BRUNO' && password == 'dev08912') {
+            podeLogar = true
         } else {
             podeLogar = false
         }
