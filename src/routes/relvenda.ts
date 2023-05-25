@@ -42,8 +42,15 @@ export async function relvendaRoutes(fastify: FastifyInstance) {
                         }
                     }
                 })
-            }
-            return reply.status(200).send({ message: 'Produto alterado com sucesso.', vendasPeriodo });
+            };
+
+            let totalFiltrado = 0;
+
+            for (let i = 0; i < vendasPeriodo.length; i++) {
+                totalFiltrado = totalFiltrado + Number(vendasPeriodo[i].valorVendaLiquido);
+            };
+
+            return reply.status(200).send({ message: 'Produto alterado com sucesso.', vendasPeriodo, totalFiltrado });
         } catch (error: any) {
             console.error(error.message);
             return reply.status(400).send({ message: 'Erro ao alterar o produto. Erro: ' + error.message });
