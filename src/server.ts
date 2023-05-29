@@ -8,6 +8,8 @@ import { vendaRoutes } from './routes/venda';
 import { desperdicioProdutoRoutes } from './routes/desperdicio';
 import { dashboardRoutes } from './routes/dashboard';
 import { relvendaRoutes } from './routes/relvenda';
+import { consultaProdRoutes } from './routes/consultaprod';
+import { consultaEstoqueRoutes } from './routes/consultaestoque';
 
 
 async function bootstrap() {
@@ -27,6 +29,8 @@ async function bootstrap() {
     await fastify.register(desperdicioProdutoRoutes);
     await fastify.register(dashboardRoutes);
     await fastify.register(relvendaRoutes);
+    await fastify.register(consultaProdRoutes);
+    await fastify.register(consultaEstoqueRoutes);
 
     await fastify.listen({ port: 3333 });
 }
