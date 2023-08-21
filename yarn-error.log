@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @prisma-generate-erd
+  C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add node-widows -g
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;E:\Git\cmd;C:\Users\User\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;E:\Python39\Scripts;E:\Python39;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Users\User\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\User\AppData\Roaming\npm
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Users\User\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;E:\Python39\Scripts;E:\Python39;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Users\User\AppData\Local\GitHubDesktop\bin;C:\Users\User\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\User\AppData\Roaming\npm
 
 Yarn version: 
   1.22.19
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@prisma-generate-erd: Request "https://registry.yarnpkg.com/@prisma-generate-erd" returned a 405
-      at Request.params.callback [as _callback] (C:\Users\User\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66154:18)
+  Error: https://registry.yarnpkg.com/node-widows: Not found
+      at Request.params.callback [as _callback] (C:\Users\User\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
       at Request.self.callback (C:\Users\User\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:527:28)
       at Request.<anonymous> (C:\Users\User\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
@@ -39,15 +39,16 @@ npm manifest:
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "@mermaid-js/mermaid-cli": "^9.3.0",
-      "prisma": "^4.13.0",
-      "prisma-erd-generator": "^1.2.5",
+      "@mermaid-js/mermaid-cli": "^10.0.2",
+      "prisma": "^4.14.1",
+      "prisma-erd-generator": "^1.7.0",
       "tsx": "^3.12.3",
       "typescript": "^4.9.5"
     },
     "dependencies": {
       "@fastify/cors": "^8.2.0",
       "@prisma/client": "^4.13.0",
+      "@prisma/generator-helper": "^4.0.0",
       "fastify": "^4.13.0",
       "short-unique-id": "^4.4.4",
       "zod": "^3.21.4"
@@ -260,15 +261,6 @@ Lockfile:
       commander "^10.0.0"
       puppeteer "^19.0.0"
   
-  "@mermaid-js/mermaid-cli@^9.3.0":
-    version "9.4.0"
-    resolved "https://registry.yarnpkg.com/@mermaid-js/mermaid-cli/-/mermaid-cli-9.4.0.tgz#9be4a3a7a4d111f9db8650a785bbfeeb7ded70c9"
-    integrity sha512-/Nqs8Xtasw5wvop1PPiqmSx5SUxq/yARH+0EhEHAx8MVdbZXtUnzuK+Yv6NgpD2/Fb84/N3jF08zmIiJSyT5Lg==
-    dependencies:
-      chalk "^5.0.1"
-      commander "^10.0.0"
-      puppeteer "^19.0.0"
-  
   "@prisma/client@^4.13.0":
     version "4.13.0"
     resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.13.0.tgz#271d2b9756503ea17bbdb459c7995536cf2a6191"
@@ -276,15 +268,34 @@ Lockfile:
     dependencies:
       "@prisma/engines-version" "4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a"
   
+  "@prisma/debug@4.14.1":
+    version "4.14.1"
+    resolved "https://registry.yarnpkg.com/@prisma/debug/-/debug-4.14.1.tgz#e771ff3eac3c3aac42aafea62907eda6ed92754b"
+    integrity sha512-jZjNZimL7FVlSyL78r/w9pSqu2s1y+5JGyi0Ajvq17cBCdDzMONGM76PDKBWjOusRhbZD4xcTQ5kfr9JqM0I2A==
+    dependencies:
+      "@types/debug" "4.1.7"
+      debug "4.3.4"
+      strip-ansi "6.0.1"
+  
   "@prisma/engines-version@4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a":
     version "4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a"
     resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a.tgz#ae338908d11685dee50e7683502d75442b955bf9"
     integrity sha512-fsQlbkhPJf08JOzKoyoD9atdUijuGBekwoOPZC3YOygXEml1MTtgXVpnUNchQlRSY82OQ6pSGQ9PxUe4arcSLQ==
   
-  "@prisma/engines@4.13.0":
-    version "4.13.0"
-    resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.13.0.tgz#582a6b90b6efeb0f465984f1fe0e72a4afaaa5ae"
-    integrity sha512-HrniowHRZXHuGT9XRgoXEaP2gJLXM5RMoItaY2PkjvuZ+iHc0Zjbm/302MB8YsPdWozAPHHn+jpFEcEn71OgPw==
+  "@prisma/engines@4.14.1":
+    version "4.14.1"
+    resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.14.1.tgz#dac49f8d1f2d4f14a8ed7e6f96b24cd49bd6cd91"
+    integrity sha512-APqFddPVHYmWNKqc+5J5SqrLFfOghKOLZxobmguDUacxOwdEutLsbXPVhNnpFDmuQWQFbXmrTTPoRrrF6B1MWA==
+  
+  "@prisma/generator-helper@^4.0.0":
+    version "4.14.1"
+    resolved "https://registry.yarnpkg.com/@prisma/generator-helper/-/generator-helper-4.14.1.tgz#07c14ee9c8cf9239dcc91d124e165d62009979df"
+    integrity sha512-7mxfM6NTLsUgbmx8t+AQTtOdDuUMG+D4K5QtALQP1A3MD7wZy2O+Np4apbvVJwNUn1286PZWk2DTv4cF7XiK3w==
+    dependencies:
+      "@prisma/debug" "4.14.1"
+      "@types/cross-spawn" "6.0.2"
+      cross-spawn "7.0.3"
+      kleur "4.1.5"
   
   "@puppeteer/browsers@0.5.0":
     version "0.5.0"
@@ -299,6 +310,25 @@ Lockfile:
       tar-fs "2.1.1"
       unbzip2-stream "1.4.3"
       yargs "17.7.1"
+  
+  "@types/cross-spawn@6.0.2":
+    version "6.0.2"
+    resolved "https://registry.yarnpkg.com/@types/cross-spawn/-/cross-spawn-6.0.2.tgz#168309de311cd30a2b8ae720de6475c2fbf33ac7"
+    integrity sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==
+    dependencies:
+      "@types/node" "*"
+  
+  "@types/debug@4.1.7":
+    version "4.1.7"
+    resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.7.tgz#7cc0ea761509124709b8b2d1090d8f6c17aadb82"
+    integrity sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==
+    dependencies:
+      "@types/ms" "*"
+  
+  "@types/ms@*":
+    version "0.7.31"
+    resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
+    integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
   
   "@types/node@*":
     version "18.16.3"
@@ -521,6 +551,15 @@ Lockfile:
     integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
     dependencies:
       node-fetch "2.6.7"
+  
+  cross-spawn@7.0.3:
+    version "7.0.3"
+    resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
+    integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
+    dependencies:
+      path-key "^3.1.0"
+      shebang-command "^2.0.0"
+      which "^2.0.1"
   
   debug@4, debug@4.3.4, debug@^4.0.0, debug@^4.1.1:
     version "4.3.4"
@@ -789,6 +828,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz#f116f8064fe90b3f7844a38997c0b75051269f1d"
     integrity sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
   
+  isexe@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
+    integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
+  
   js-tokens@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -810,6 +854,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz#ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
     integrity sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
+  
+  kleur@4.1.5:
+    version "4.1.5"
+    resolved "https://registry.yarnpkg.com/kleur/-/kleur-4.1.5.tgz#95106101795f7050c6c650f350c683febddb1780"
+    integrity sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==
   
   light-my-request@^5.6.1:
     version "5.9.1"
@@ -895,6 +944,11 @@ Lockfile:
       json-parse-even-better-errors "^2.3.0"
       lines-and-columns "^1.1.6"
   
+  path-key@^3.1.0:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/path-key/-/path-key-3.1.1.tgz#581f6ade658cbba65a0d3380de7753295054f375"
+    integrity sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==
+  
   path-type@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
@@ -935,7 +989,7 @@ Lockfile:
       sonic-boom "^3.1.0"
       thread-stream "^2.0.0"
   
-  prisma-erd-generator@^1.2.5:
+  prisma-erd-generator@^1.7.0:
     version "1.7.0"
     resolved "https://registry.yarnpkg.com/prisma-erd-generator/-/prisma-erd-generator-1.7.0.tgz#6a4be2e5e593a1cd5fb26c477bf2e05759f02fb0"
     integrity sha512-YwFSMf83Cvly9QcWdEG+HYaCTBf9puV65QVVwXawqpS2KBi/xevUtTfwQ/KrbuCUPdypnwEu51aslfgZ4Sq88g==
@@ -943,12 +997,12 @@ Lockfile:
       "@mermaid-js/mermaid-cli" "^10.0.2"
       dotenv "^16.0.3"
   
-  prisma@^4.13.0:
-    version "4.13.0"
-    resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.13.0.tgz#0b83f40acf50cd47d7463a135c4e9b275713e602"
-    integrity sha512-L9mqjnSmvWIRCYJ9mQkwCtj4+JDYYTdhoyo8hlsHNDXaZLh/b4hR0IoKIBbTKxZuyHQzLopb/+0Rvb69uGV7uA==
+  prisma@^4.14.1:
+    version "4.14.1"
+    resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.14.1.tgz#7a6bb4ce847a9d08deabb6acdf3116fff15e1316"
+    integrity sha512-z6hxzTMYqT9SIKlzD08dhzsLUpxjFKKsLpp5/kBDnSqiOjtUyyl/dC5tzxLcOa3jkEHQ8+RpB/fE3w8bgNP51g==
     dependencies:
-      "@prisma/engines" "4.13.0"
+      "@prisma/engines" "4.14.1"
   
   process-warning@^2.0.0:
     version "2.2.0"
@@ -1113,6 +1167,18 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.6.0.tgz#131921e50f62ff1a66a461d7d62d7b21d5d15a51"
     integrity sha512-RVnVQxTXuerk653XfuliOxBP81Sf0+qfQE73LIYKcyMYHG94AuH0kgrQpRDuTZnSmjpysHmzxJXKNfa6PjFhyQ==
   
+  shebang-command@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-2.0.0.tgz#ccd0af4f8835fbdc265b82461aaf0c36663f34ea"
+    integrity sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==
+    dependencies:
+      shebang-regex "^3.0.0"
+  
+  shebang-regex@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
+    integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
+  
   short-unique-id@^4.4.4:
     version "4.4.4"
     resolved "https://registry.yarnpkg.com/short-unique-id/-/short-unique-id-4.4.4.tgz#a45df68303bbd2dbb5785ed7708e891809c9cb7a"
@@ -1159,7 +1225,7 @@ Lockfile:
     dependencies:
       safe-buffer "~5.2.0"
   
-  strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  strip-ansi@6.0.1, strip-ansi@^6.0.0, strip-ansi@^6.0.1:
     version "6.0.1"
     resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
     integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -1264,6 +1330,13 @@ Lockfile:
     dependencies:
       tr46 "~0.0.3"
       webidl-conversions "^3.0.0"
+  
+  which@^2.0.1:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/which/-/which-2.0.2.tgz#7c6a8dd0a636a0327e10b59c9286eee93f3f51b1"
+    integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
+    dependencies:
+      isexe "^2.0.0"
   
   wrap-ansi@^7.0.0:
     version "7.0.0"

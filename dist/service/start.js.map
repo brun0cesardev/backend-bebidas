@@ -1,0 +1,1 @@
+{"version":3,"file":"start.js","names":["srv","start"],"sources":["../../src/service/start.js"],"sourcesContent":["import { srv } from '../createWindowsService';\r\n\r\n/**\r\n * Starting service.\r\n */\r\nsrv().start();"],"mappings":"aAAA;;AAEA;AACA;AACA;AACA,IAAAA,yBAAA,IAAMC,KAAN"}

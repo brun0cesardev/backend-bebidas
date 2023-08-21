@@ -10,6 +10,7 @@ import { dashboardRoutes } from './routes/dashboard';
 import { relvendaRoutes } from './routes/relvenda';
 import { consultaProdRoutes } from './routes/consultaprod';
 import { consultaEstoqueRoutes } from './routes/consultaestoque';
+import { prisma } from './lib/prisma';
 
 
 async function bootstrap() {
@@ -32,7 +33,20 @@ async function bootstrap() {
     await fastify.register(consultaProdRoutes);
     await fastify.register(consultaEstoqueRoutes);
 
-    await fastify.listen({ port: 3333 });
+    try {
+        await prisma.$connect();
+        console.log('Conexão com o banco de dados estabelecida.');
+    } catch (error) {
+        console.error('Erro ao conectar ao banco de dados:', error);
+    }
+
+    // Inicie o servidor Fastify
+    try {
+        await fastify.listen({ port: 3333 });
+        console.log('Servidor iniciado na porta 3333.');
+    } catch (error) {
+        console.error('Erro ao iniciar o servidor:', error);
+    }
 }
 
 bootstrap()
