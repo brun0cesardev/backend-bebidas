@@ -6,7 +6,7 @@ const serviceLog = new _nodeWindows.EventLogger();
 const options = {
   name: 'Sistema-Bebidas-Placebeer',
   description: 'Sistema de bebidas',
-  script: _path.default.join(__dirname, '../src/server.ts'),
+  script: _path.default.join(__dirname, '../src/server.js'),
   nodeOptions: '--harmony' };
 
 const srv = () => {

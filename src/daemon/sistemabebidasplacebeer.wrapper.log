@@ -1,4 +1,0 @@
-2023-08-21 20:01:36 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\User\Desktop\sistema_bebida\server\node_modules\node-windows\lib\wrapper.js --file C:\Users\User\Desktop\sistema_bebida\server\src\server.ts --scriptoptions= --log "Sistema-Bebidas-Placebeer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-08-21 20:01:36 - Started 3616
-2023-08-21 20:02:07 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\User\Desktop\sistema_bebida\server\node_modules\node-windows\lib\wrapper.js --file C:\Users\User\Desktop\sistema_bebida\server\src\server.ts --scriptoptions= --log "Sistema-Bebidas-Placebeer wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
-2023-08-21 20:02:07 - Started 8304
