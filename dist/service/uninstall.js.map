@@ -1,1 +1,0 @@
-{"version":3,"file":"uninstall.js","names":["srv","uninstall"],"sources":["../../src/service/uninstall.js"],"sourcesContent":["import { srv } from '../createWindowsService';\r\n\r\n/**\r\n * Uninstalling service.\r\n */\r\nsrv().uninstall();"],"mappings":"aAAA;;AAEA;AACA;AACA;AACA,IAAAA,yBAAA,IAAMC,SAAN"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"install.js","names":["srv","install"],"sources":["../../src/service/install.js"],"sourcesContent":["import { srv } from '../createWindowsService';\r\n\r\n/**\r\n * Installing service.\r\n */\r\nsrv().install();"],"mappings":"aAAA;;AAEA;AACA;AACA;AACA,IAAAA,yBAAA,IAAMC,OAAN"}

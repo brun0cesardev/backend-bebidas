@@ -1,1 +1,0 @@
-{"version":3,"file":"stop.js","names":["srv","stop"],"sources":["../../src/service/stop.js"],"sourcesContent":["import { srv } from '../createWindowsService';\r\n\r\n/**\r\n * Stopping service.\r\n */\r\nsrv().stop();"],"mappings":"aAAA;;AAEA;AACA;AACA;AACA,IAAAA,yBAAA,IAAMC,IAAN"}
