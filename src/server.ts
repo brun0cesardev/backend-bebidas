@@ -19,7 +19,7 @@ async function bootstrap() {
     });
 
     await fastify.register(cors, {
-        origin: ["https://front-bebidas.vercel.app/", "http://localhost:3000"],
+        origin: true,
     });
 
     await fastify.register(cadastroProdutoRoutes);
