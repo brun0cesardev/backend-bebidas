@@ -11,6 +11,7 @@ import { relvendaRoutes } from './routes/relvenda';
 import { consultaProdRoutes } from './routes/consultaprod';
 import { consultaEstoqueRoutes } from './routes/consultaestoque';
 import { prisma } from './lib/prisma';
+import { naoParaBackenRoutes } from './routes/naotravaback';
 
 
 async function bootstrap() {
@@ -32,6 +33,7 @@ async function bootstrap() {
     await fastify.register(relvendaRoutes);
     await fastify.register(consultaProdRoutes);
     await fastify.register(consultaEstoqueRoutes);
+    await fastify.register(naoParaBackenRoutes);
 
     try {
         await prisma.$connect();
@@ -43,6 +45,7 @@ async function bootstrap() {
     // Inicie o servidor Fastify
     try {
         await fastify.listen({ host: '0.0.0.0', port: 3333 });
+        // await fastify.listen({ port: 3333 });
         console.log(`Servidor iniciado na porta 3333.`);
     } catch (error) {
         console.error('Erro ao iniciar o servidor:', error);
