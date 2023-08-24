@@ -12,6 +12,7 @@ import { consultaProdRoutes } from './routes/consultaprod';
 import { consultaEstoqueRoutes } from './routes/consultaestoque';
 import { prisma } from './lib/prisma';
 import { naoParaBackenRoutes } from './routes/naotravaback';
+import { relProdutoMaisVendidoRoutes } from './routes/relprodvendido';
 
 
 async function bootstrap() {
@@ -34,6 +35,7 @@ async function bootstrap() {
     await fastify.register(consultaProdRoutes);
     await fastify.register(consultaEstoqueRoutes);
     await fastify.register(naoParaBackenRoutes);
+    await fastify.register(relProdutoMaisVendidoRoutes);
 
     try {
         await prisma.$connect();
