@@ -24,8 +24,10 @@ async function bootstrap() {
         origin: 'https://front-bebidas.vercel.app',
     });
 
-    await fastify.addHook('onSend', (request, reply, payload, done) => {
-        reply.header('Acess-Control-Allow-Origin', '*')
+    fastify.addHook('onSend', (request, reply, payload, done) => {
+        reply.header('Acess-Control-Allow-Origin', '*');
+        reply.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        done(null, payload);
     })
 
     await fastify.register(cadastroProdutoRoutes);
