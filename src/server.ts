@@ -53,7 +53,7 @@ async function bootstrap() {
     // Inicie o servidor Fastify
     try {
         // await fastify.listen({ host: 'https://backend-bebidas.vercel.app/', port: process.env.PORT });
-        await fastify.listen({ port: process.env.PORT });
+        fastify.listen({ port: Number(process.env.PORT) });
         console.log(`Servidor iniciado na porta 3333.`);
     } catch (error) {
         console.error('Erro ao iniciar o servidor:', error);
