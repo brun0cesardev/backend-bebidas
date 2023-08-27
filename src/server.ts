@@ -21,11 +21,11 @@ async function bootstrap() {
     });
 
     await fastify.register(cors, {
-        origin: 'https://front-bebidas.vercel.app',
+        origin: true,
     });
 
     fastify.addHook('onSend', (request, reply, payload, done) => {
-        reply.header('Acess-Control-Allow-Origin', '*');
+        reply.header('Acess-Control-Allow-Origin', 'https://front-bebidas.vercel.app');
         reply.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         done(null, payload);
     })
